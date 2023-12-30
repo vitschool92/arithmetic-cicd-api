@@ -2,7 +2,7 @@ http:
   port: "8081"
   
 log:
-  message: "Welcome to CI/CD Process with Jenkins setup"
+  message: "Hi Welcome to VITech Talks , Here we are learning CI/CD Process with Jenkins"
   
 deployment:
   app:
