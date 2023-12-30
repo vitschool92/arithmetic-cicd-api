@@ -28,6 +28,6 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="2ca1b1b2-fe5f-45e7-9c7a-fae3a38d308a" message="-----------successfully completed arithmetic api---------"/>
+		<logger level="INFO" doc:name="Logger" doc:id="2ca1b1b2-fe5f-45e7-9c7a-fae3a38d308a" message="-----------successfully completed arithmetic api flow---------------"/>
 	</flow>
 </mule>
