@@ -2,7 +2,7 @@ http:
   port: "8081"
   
 log:
-  message: "Welcome to CI/CD Process"
+  message: "Welcome to CI/CD Process with Jenkins setup"
   
 deployment:
   app:
