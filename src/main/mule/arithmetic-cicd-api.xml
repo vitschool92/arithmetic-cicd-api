@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a0cc880d-e4ac-4f55-a1dc-0edfef4eb4a9" >
+		<http:listener-connection host="0.0.0.0" port="${http.port}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="7d504513-b64a-4b0c-9b89-ed39efc546c5" file="myconfig-Dev.yaml" />
+	<flow name="arithmetic-cicd-apiFlow" doc:id="1d771fca-9960-4646-ae7e-c5e314a722e3" >
+		<http:listener doc:name="Listener" doc:id="470d03c7-0c6f-4df2-90e3-e9ba797f135f" config-ref="HTTP_Listener_config" path="/arithmetic"/>
+		<logger level="INFO" doc:name="Logger" doc:id="a3ae31eb-c6eb-43f4-af9d-96617239be32" message="------------Arithmetic API is Invoked -------------------"/>
+		<set-variable value="#[attributes.queryParams.num1]" doc:name="num1" doc:id="685726c2-f67d-460a-a4b8-1d0de960f188" variableName="num1"/>
+		<set-variable value="#[attributes.queryParams.num2]" doc:name="num2" doc:id="3b65bd83-1a2d-4205-b4e6-45389c98b37e" variableName="num2"/>
+		<ee:transform doc:name="Transform Message" doc:id="3f05f230-1bd4-4f23-8e61-80e757450f33" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": p('log.message'),
+	"addition": (vars.num1 as Number + vars.num2 as Number),
+	"Subtraction": (vars.num1 as Number - vars.num2 as Number),
+	"Multiplication": (vars.num1 as Number * vars.num2 as Number),
+	"Division": (vars.num1 as Number / vars.num2 as Number)
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="2ca1b1b2-fe5f-45e7-9c7a-fae3a38d308a" message="-----------successfully completed arithmetic api---------"/>
+	</flow>
+</mule>
