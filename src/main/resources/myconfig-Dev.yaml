@@ -6,9 +6,9 @@ log:
   
 deployment:
   app:
-    runtime: 4.4.0
+    runtime: "4.4.0"
   region: "us-east-2"
-  workers: 1
-  workerType: MICRO 
+  workers: "1"
+  workerType: "MICRO" 
   
   
